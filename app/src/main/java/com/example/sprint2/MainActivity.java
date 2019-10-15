@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.sprint2.DatabaseHelper.DatabaseHelper;
 import com.example.sprint2.Model.Character;
@@ -12,6 +13,8 @@ import com.example.sprint2.Model.Character;
 public class MainActivity extends AppCompatActivity {
     DatabaseHelper db;
     Button StartButton;
+    private long backPressedTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,11 +24,11 @@ public class MainActivity extends AppCompatActivity {
         StartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, MenuActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
 
-        db = new DatabaseHelper(this);
+////////////////////////////////////        db = new DatabaseHelper(this);
 
         // Creating words
 //        Word word1 = new Word("Ada", "Aya");
@@ -39,23 +42,23 @@ public class MainActivity extends AppCompatActivity {
 
 //        Log.d("Word Count", "Word Count: " + db.getAllWords().size());
 
-        String swara[] = getResources().getStringArray(R.array.swara);
-        String ngalagena[] = getResources().getStringArray(R.array.ngalagena);
+////////////////////////////////////        String swara[] = getResources().getStringArray(R.array.swara);
+////////////////////////////////////        String ngalagena[] = getResources().getStringArray(R.array.ngalagena);
         /*for (int i = 0; i < arr.length; i++) {
             Toast.makeText(getBaseContext(),arr[i], Toast.LENGTH_LONG).show();
         }*/
         // Creating ToDos
         //Character suaraa = new Character(swara[0]);
-        for (int i=0; i<7; i++){
-            db.createCharacter(new Character(swara[i]));
+////////////////////////////////////        for (int i=0; i<7; i++){
+////////////////////////////////////            db.createCharacter(new Character(swara[i]));
             //db.createCharacter(new Character(swara[i],swara[i],swara[i]));
             //Log.e("Character_Count", "Character count: " + db.getCharacterCount());
             //Log.d("SwaraChar", db.getCharacter( 1 ).getSunda() );
-        }
-        for (int i=0; i<23; i++){
-            db.createCharacter(new Character(ngalagena[i]));
+////////////////////////////////////        }
+////////////////////////////////////        for (int i=0; i<23; i++){
+////////////////////////////////////            db.createCharacter(new Character(ngalagena[i]));
             //Log.e("Character_Count", "Character count: " + db.getCharacterCount());
-        }
+////////////////////////////////////        }
 //        db.createCharacter(new Character(swara[0]));
 //        Character suaraE = new Character(swara[1]);
 //        Character suarai = new Character(swara[2]);
@@ -160,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         */
 
         // Don't forget to close database connection
-        db.closeDB();
+////////////////////////////////////        db.closeDB();
 
 //        Button start = (Button) findViewById(R.id.start);
 //        start.setOnClickListener(new View.OnClickListener() {
@@ -172,5 +175,17 @@ public class MainActivity extends AppCompatActivity {
 ////                view.getContext().startActivity(intent);
 //            }
 //        });
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(backPressedTime + 2000 > System.currentTimeMillis()){
+            moveTaskToBack(true);
+            finish();
+        } else{
+            Toast.makeText( this, "Tekan kembali untuk selesai", Toast.LENGTH_SHORT ).show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

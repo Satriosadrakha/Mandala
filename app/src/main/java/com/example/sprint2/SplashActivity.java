@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -15,6 +16,7 @@ public class SplashActivity extends AppCompatActivity {
     private ImageView imageView;
     private Animation blink;
     private int intervalsplash = 3000;
+    private long backPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +30,7 @@ public class SplashActivity extends AppCompatActivity {
         // start activity after some amount of time
         new Handler().postDelayed(() ->
                 startActivity(new Intent(getApplicationContext()
-                        ,MainActivity.class)), Long.parseLong(String.valueOf(intervalsplash)));
+                        ,LoginActivity.class)), Long.parseLong(String.valueOf(intervalsplash)));
         //new Handler().postDelayed(() ->
         //startActivity(new Intent(getApplicationContext(),
         //MainMenu.class)), Long.parseLong(String.valueOf(intervalsplash)));
@@ -47,5 +49,17 @@ public class SplashActivity extends AppCompatActivity {
 
     public void onAnimationRepeat(Animation animation) {
         //TODO:
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        if(backPressedTime + 2000 > System.currentTimeMillis()){
+            moveTaskToBack(true);
+            finish();
+        } else{
+            Toast.makeText( this, "Tekan kembali untuk keluar aplikasi", Toast.LENGTH_SHORT ).show();
+        }
+        backPressedTime = System.currentTimeMillis();
     }
 }

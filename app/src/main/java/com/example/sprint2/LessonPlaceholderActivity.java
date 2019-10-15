@@ -11,6 +11,7 @@ public class LessonPlaceholderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+        setTitle( "Aksara Sunda" );
         setContentView( R.layout.activity_lesson_placeholder );
 
         //int categoryId = getIntent().getIntExtra("CATEGORY_ID", 0);

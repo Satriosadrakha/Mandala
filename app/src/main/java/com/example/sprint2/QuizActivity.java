@@ -44,6 +44,9 @@ public class QuizActivity extends AppCompatActivity {
 
     private long backPressedTime;
 
+    int categoryID;
+    String categoryName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
@@ -64,10 +67,13 @@ public class QuizActivity extends AppCompatActivity {
         textColorDefaultRb = rb1.getTextColors();
 
         Intent intent = getIntent();
-        int categoryID = intent.getIntExtra( StartQuizActivity.EXTRA_CATEGORY_ID,0 );
-        String categoryName = intent.getStringExtra( StartQuizActivity.EXTRA_CATEGORY_NAME );
 
-        textViewCategory.setText( "Category: " + categoryName );
+        categoryID = intent.getIntExtra( StartQuizActivity.EXTRA_CATEGORY_ID,0 );
+        categoryName = intent.getStringExtra( StartQuizActivity.EXTRA_CATEGORY_NAME );
+
+        setTitle( categoryName );
+
+        textViewCategory.setText( "Kategori: " + categoryName );
 
         if(savedInstanceState == null){
             DatabaseHelper dbHelper = DatabaseHelper.getInstance( this );
@@ -92,7 +98,7 @@ public class QuizActivity extends AppCompatActivity {
                     if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()){
                         checkedAnswer();
                     } else{
-                        Toast.makeText( QuizActivity.this, "Please select an answer!", Toast.LENGTH_SHORT ).show();
+                        Toast.makeText( QuizActivity.this, "Silakan pilih jawaban terlebih dahulu", Toast.LENGTH_SHORT ).show();
                     }
                 } else{
                     showNextQuestion();
@@ -120,9 +126,9 @@ public class QuizActivity extends AppCompatActivity {
             rb4.setText( currentQuestion.getOption4() );
 
             questionCounter++;
-            textViewQuestionCount.setText( "Question: " + questionCounter + "/" +questionCountTotal );
+            textViewQuestionCount.setText( "Pertanyaan ke: " + questionCounter + "/" +questionCountTotal );
             answered = false;
-            buttonConfirmNext.setText( "Confirm" );
+            buttonConfirmNext.setText( "Konfirmasi" );
         } else{
             finishQuiz();
         }
@@ -136,7 +142,7 @@ public class QuizActivity extends AppCompatActivity {
 
         if (answerNr == currentQuestion.getAnswerNr()){
             score++;
-            textViewScore.setText( "Score: " + score );
+            textViewScore.setText( "Skor: " + score );
         }
 
         showSolution();
@@ -151,26 +157,26 @@ public class QuizActivity extends AppCompatActivity {
         switch (currentQuestion.getAnswerNr()){
             case 1:
                 rb1.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Answer 1 is correct" );
+                textViewQuestion.setText( "Jawaban ke-1 yang benar" );
                 break;
             case 2:
                 rb2.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Answer 2 is correct" );
+                textViewQuestion.setText( "Jawaban ke-2 yang benar" );
                 break;
             case 3:
                 rb3.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Answer 3 is correct" );
+                textViewQuestion.setText( "Jawaban ke-3 yang benar" );
                 break;
             case 4:
                 rb4.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Answer 4 is correct" );
+                textViewQuestion.setText( "Jawaban ke-4 yang benar" );
                 break;
         }
 
         if(questionCounter < questionCountTotal){
-            buttonConfirmNext.setText( "Next" );
+            buttonConfirmNext.setText( "Selanjutnya" );
         } else{
-            buttonConfirmNext.setText( "Finish" );
+            buttonConfirmNext.setText( "Selesai" );
         }
     }
 
@@ -186,7 +192,7 @@ public class QuizActivity extends AppCompatActivity {
         if(backPressedTime + 2000 > System.currentTimeMillis()){
             finishQuiz();
         } else{
-            Toast.makeText( this, "Press back again to finish", Toast.LENGTH_SHORT ).show();
+            Toast.makeText( this, "Tekan kembali untuk selesai", Toast.LENGTH_SHORT ).show();
         }
         backPressedTime = System.currentTimeMillis();
     }

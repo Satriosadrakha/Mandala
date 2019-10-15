@@ -12,6 +12,7 @@ import com.example.sprint2.Model.Character;
 import com.example.sprint2.Model.Word;
 import com.example.sprint2.Model.Question;
 import com.example.sprint2.QuizContract.*;
+import com.example.sprint2.R;
 
 
 import java.text.SimpleDateFormat;
@@ -34,6 +35,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static DatabaseHelper instance;
 
     private SQLiteDatabase db;
+
+    private Context context;
 
     // Table Names
     private static final String TABLE_CHARACTER = "characters";
@@ -127,6 +130,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         //SQLiteDatabase db = this.getWritableDatabase();
+
+        // Application Context
+        this.context = context.getApplicationContext();
     }
 
     public static synchronized DatabaseHelper getInstance(Context context){
@@ -197,40 +203,166 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private void fillQuestionTable(){
         addQuestion( new Question(
-                "BASIC 1 LESSON 1: A is correct",
-                "A", "B", "C", "D",
+                "Terjemahan dari: ᮘ",
+                "Ba", "Ca", "Da", "Fa",
                 1,
                 1  ) );
 
         addQuestion( new Question(
-                "BASIC 1 LESSON 1: C is correct",
-                "A", "B", "C", "D",
+                "Terjemahan dari: ᮙ",
+                "Na", "Pa", "Ma", "Ba",
                 3,
+                1  ) );
+        addQuestion( new Question(
+                "Terjemahan dari: ᮃ",
+                "A", "I", "U", "O",
+                1,
+                1  ) );
+        addQuestion( new Question(
+                "Terjemahan dari: ᮞ",
+                "Ra", "Sa", "Pa", "Ka",
+                2,
+                1  ) );
+        addQuestion( new Question(
+                "Terjemahan dari: ᮆ",
+                "A", "É", "Eu", "E",
+                2,
                 1  ) );
 
         addQuestion( new Question(
-                "BASIC 1 LESSON 2: B is correct",
-                "A", "B", "C", "D",
+                "Arti dari: ᮃᮞ",
+                "Ada", "Asa", "Aya", "Ala",
                 2,
                 2  ) );
 
         addQuestion( new Question(
-                "BASIC 1 LESSON 2: D is correct",
-                "A", "B", "C", "D",
+                "Arti dari: ᮃᮚ",
+                "Asa", "Ada", "Ala", "Aya",
                 4,
                 2  ) );
 
         addQuestion( new Question(
-                "BASIC 2 LESSON 1: A is correct",
-                "A", "B", "C", "D",
+                "Arti dari: ᮞᮠ",
+                "Saha", "Kana", "Saé", "Kai",
+                1,
+                2  ) );
+
+        addQuestion( new Question(
+                "Bahasa Sunda dari: Saya ingin tidur \nadalah",
+                "Abdi hayang saré", "Kuring hayang dahar", "Kuring nepi tuang", "Abdi nepi neda",
                 1,
                 3  ) );
 
         addQuestion( new Question(
-                "BASIC 2 LESSON 2: A is correct",
-                "A", "B", "C", "D",
-                1,
+                "Bahasa Sunda dari: Dia berjalan sampai di situ \nadalah",
+                "Manéh leumpang nepi ka ditu", "Manéhna leumpang nepi ka ditu",
+                "Manéhna leumpang nepi ka situ", "Manéh leumpang nepi ka situ",
+                2,
+                3  ) );
+
+        addQuestion( new Question(
+                "Bahasa Sunda dari: Anda sudah makan \nadalah",
+                "Anjeun parantos sararé", "Kuring parantos didahar", "Kuring parantos sararé", "Anjeun parantos didahar",
+                4,
+                3  ) );
+
+        addQuestion( new Question(
+                "Bahasa Indonesia dari: Abdi badé diuk \nadalah",
+                "Saya sudah duduk", "Saya akan duduk", "Kamu akan duduk", "Kamu sudah duduk",
+                2,
                 4  ) );
+
+        addQuestion( new Question(
+                "Bahasa Indonesia dari: Maranéhanana nyandak buku \nadalah",
+                "Kamu mengambil buku", "Mereka menyimpan buku", "Kamu menyimpan buku", "Mereka mengambil buku",
+                4,
+                4  ) );
+
+        addQuestion( new Question(
+                "Bahasa Indonesia dari: Anjeunna nempatkeun korsi \nadalah",
+                "Beliau mengeluarkan kursi", "Anda mengeluarkan kursi", "Beliau menaruh kursi", "Anda menaruh kursi",
+                3,
+                4  ) );
+
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Meri adalah",
+                "Bebek", "Angsa", "Burung", "Kelelawar",
+                1,
+                5  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Maung adalah",
+                "Macan", "Singa", "Panther", "Harimau",
+                4,
+                5  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Sireum adalah",
+                "Angsa", "Semut", "Belalang", "Burung",
+                2,
+                5  ) );
+        addQuestion( new Question(
+                "Bahasa Sunda dari Ular adalah",
+                "Oray", "Beurit", "Reungit", "Lauk",
+                1,
+                5  ) );
+        addQuestion( new Question(
+                "Bahasa Sunda dari Kura-kura adalah",
+                "Kuya", "Cucunguk", "Kéong", "Peusing",
+                1,
+                5  ) );
+
+        addQuestion( new Question(
+                "Aksara Sunda dari Tikus adalah",
+                "ᮘᮏᮤ", "ᮊᮥᮚ", "ᮘᮩᮛᮤᮒ᮪", "ᮠᮤᮜᮩᮓ",
+                3,
+                6  ) );
+        addQuestion( new Question(
+                "Aksara Sunda dari Kodok adalah",
+                "ᮊᮥᮚ", "ᮘᮀᮊᮧ", "ᮠᮤᮜᮩᮓ", "ᮙᮔᮥᮊ᮪",
+                2,
+                6  ) );
+        addQuestion( new Question(
+                "Aksara Sunda dari Unta adalah",
+                "ᮘᮀᮊᮧᮀ᮪", "ᮇᮔ᮪ᮒ", "ᮠᮤᮜᮩᮓ", "ᮙᮔᮥᮊ᮪",
+                2,
+                6  ) );
+
+        addQuestion( new Question(
+                "Bahasa Sunda dari Kuning adalah",
+                "Bodas", "Beureum", "Kopi", "Konéng",
+                4,
+                7  ) );
+        addQuestion( new Question(
+                "Bahasa Sunda dari Hijau adalah",
+                "Héjau", "Hajo", "Héjo", "Hajau",
+                3,
+                7  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Hideung adalah",
+                "Hitam", "Putih", "Coklat", "Biru",
+                1,
+                7  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Bodas adalah",
+                "Merah", "Hitam", "Kuning", "Putih",
+                4,
+                7  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Beureum adalah",
+                "Putih", "Merah", "Hitam", "Abu-abu",
+                2,
+                7  ) );
+
+        addQuestion( new Question(
+                "Aksara Sunda dari Kuning adalah",
+                "ᮊᮧᮔ", "ᮊᮥᮔ", "ᮊᮨᮔ", "ᮊᮥᮔ",
+                1,
+                8  ) );
+        addQuestion( new Question(
+                "Aksara Sunda dari Hijau adalah",
+                "ᮘᮩᮛᮩᮙ", "ᮠᮦᮏᮧ", "ᮘᮧᮓᮞ", "ᮠᮤᮓ",
+                2,
+                8  ) );
+
 
 //        Question q1 = new Question( "BASIC 1: A is correct",
 //                "A", "B", "C",

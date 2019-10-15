@@ -8,6 +8,7 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+        setTitle( "Tentang Kami" );
         setContentView( R.layout.activity_about );
     }
 }

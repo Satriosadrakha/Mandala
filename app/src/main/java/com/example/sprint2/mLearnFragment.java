@@ -7,8 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
 public class mLearnFragment extends Fragment {
     private String mText;
@@ -16,6 +18,8 @@ public class mLearnFragment extends Fragment {
 
     private View mContent;
     private ScrollView mScrollView;
+
+    public static final String LESSON_ID = "lessonID";
 
     public static Fragment newInstance(String text, int color) {
         Fragment frag = new mLearnFragment();
@@ -36,6 +40,12 @@ public class mLearnFragment extends Fragment {
         ImageView profileImage;
         super.onViewCreated(view, savedInstanceState);
 
+        // SqLite database handler
+//        db = new DatabaseHelper(getActivity().getApplicationContext());
+
+//        HashMap<String, String> user = db.getUserDetails();
+
+//        int progress = user.get("progress");
 
         // initialize views
         mContent = view.findViewById(R.id.mLearnFragment);
@@ -55,11 +65,58 @@ public class mLearnFragment extends Fragment {
             startActivity(intent);
         });
 
+        Intent intent = new Intent(getActivity(), LessonActivity.class);
+
         final View basic1 = view.findViewById(R.id.basic_1);
-        basic1.setOnClickListener((View v)->{
-            Intent intent = new Intent(getActivity(), LessonActivity.class);
-            startActivity(intent);
+        basic1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(LESSON_ID, 0);
+                startActivity(intent);
+            }
         });
+
+        final View basic2 = view.findViewById(R.id.basic_2);
+        basic2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(LESSON_ID, 1);
+                //Toast.makeText(getApplicationContext(),String.valueOf(lessonID),Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+            }
+        });
+
+        final View hewan = view.findViewById(R.id.hewan);
+        hewan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(LESSON_ID, 2);
+                startActivity(intent);
+            }
+        });
+
+        final View warna = view.findViewById(R.id.warna);
+        warna.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent.putExtra(LESSON_ID, 3);
+                startActivity(intent);
+            }
+        });
+
+        // session manager
+//        session = new SessionManager(getActivity().getApplicationContext());
+
+        // Logout button click event
+
+//        Button btnLogout = (Button) getActivity().findViewById(R.id.btnLogout);
+//        btnLogout.setOnClickListener(new View.OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                logoutUser();
+//            }
+//        });
     }
 
     @Override

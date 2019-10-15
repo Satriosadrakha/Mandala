@@ -1,5 +1,6 @@
 package com.example.sprint2;
 
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +22,10 @@ import java.util.List;
 
 public class AksaraLessonActivity extends AppCompatActivity {
     DatabaseHelper db;
+//    Button[] btn6 = new Button[6];
+//    Button[] btn3 = new Button[3];
+//    Button[] btn5 = new Button[5];
+
 
     // Array of strings for ListView Title
     String[] listviewTitle;// = new String[]{
@@ -42,8 +47,10 @@ public class AksaraLessonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate( savedInstanceState );
+        setTitle( "Pelajaran Aksara Sunda" );
         setContentView( R.layout.activity_aksara_lesson );
 
+//        ImageButton imgBtn = (ImageButton)findViewById( R.id.listrow_sound );
         db = new DatabaseHelper(this);
 
         int lessonId = getIntent().getIntExtra("LESSON_ID", 0);
@@ -57,6 +64,7 @@ public class AksaraLessonActivity extends AppCompatActivity {
 //        long character1_id = db.createCharacter(1, a, new long[] { word1_id });
 //        Log.d("Char", String.valueOf( db.getCharacter(1) ));
         //String[] character = new String[3];
+
         List<Character> character = new ArrayList<>(  );
 
         List<Character> chara = new ArrayList<Character>();
@@ -82,6 +90,23 @@ public class AksaraLessonActivity extends AppCompatActivity {
                     if (i == 2){
                         listviewImage[i-start] = getResources().getIdentifier( "e_", "drawable", getPackageName());
                     }
+//                    int finalI = i-1;
+//                    btn6[i].setOnClickListener( new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            Object tag = v.getTag();
+//                            Toast.makeText(getApplicationContext(), "clicked button", Toast.LENGTH_SHORT).show();
+//                            final MediaPlayer mp = (MediaPlayer) MediaPlayer.create(getApplicationContext(), getResources().getIdentifier(String.valueOf( getResources().getStringArray(R.array.ngalagena)[finalI] ),"raw", getPackageName()));
+//                            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//                                @Override public void onCompletion(MediaPlayer mp) {
+//                                    mp.reset();
+//                                    mp.release();
+//                                    mp=null;
+//                                }
+//                            });
+//                            mp.start();
+//                        }
+//                    });
                     listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
                 }
                 break;
@@ -191,7 +216,8 @@ public class AksaraLessonActivity extends AppCompatActivity {
         String[] from = {"listview_image", "listview_title", "listview_description"};
         int[] to = {R.id.listrow_image, R.id.listrow_sunda, R.id.listrow_contoh};
 
-        final MediaPlayer mp = (MediaPlayer) MediaPlayer.create(getApplicationContext(), getResources().getIdentifier("a","raw", getPackageName()));
+        final MediaPlayer mp = (MediaPlayer) MediaPlayer.create(getApplicationContext(),
+                getResources().getIdentifier("a","raw", getPackageName()));
 
 //        ImageButton sound = (ImageButton)findViewById(R.id.listrow_sound);
 //        Log.d("SOUND", String.valueOf( sound ) );
