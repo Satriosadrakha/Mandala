@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Mandala</string>
+    <string name="app_name">Nyatrik Sunda</string>
 
-    <!-- String for About Mandala -->
+    <!-- String for About Nyatrik -->
     <string name="about_title">
         "Sampurasun!"
     </string>
     <string name="about_mandala">
-        "\nPerkenalkan kami dari tim pengembangan Aplikasi Mandala."
+        "\nPerkenalkan kami dari tim pengembangan Aplikasi Nyatrik."
         "\n\nMandala merupakan aplikasi pengajaran bahasa Sunda."
         "Kamu bisa belajar banyak hal tentang bahasa Sunda mulai dari aksara Sunda, "
         "kata sehari-hari dalam bahasa Sunda, dan masih banyak lagi."

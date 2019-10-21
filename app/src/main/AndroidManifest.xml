@@ -31,7 +31,13 @@
             android:label="" />
         <activity
             android:name=".MenuActivity"
-            android:label="" />
+            android:label="" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AboutActivity"
             android:label="" />
@@ -40,13 +46,8 @@
             android:label="" />
         <activity
             android:name=".SplashActivity"
-            android:label="Mandala"
+            android:label="Nyatrik Sunda"
             android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LessonPlaceholderActivity"
