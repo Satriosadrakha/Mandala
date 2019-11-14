@@ -49,6 +49,7 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme( R.style.AppTheme_Null );
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_quiz );
 
@@ -97,16 +98,16 @@ public class QuizActivity extends AppCompatActivity {
                 if (!answered){
                     if(rb1.isChecked() || rb2.isChecked() || rb3.isChecked() || rb4.isChecked()){
                         checkedAnswer();
+                        lockButton(true);
                     } else{
                         Toast.makeText( QuizActivity.this, "Silakan pilih jawaban terlebih dahulu", Toast.LENGTH_SHORT ).show();
                     }
                 } else{
+                    lockButton(false);
                     showNextQuestion();
                 }
-
             }
         } );
-
     }
 
     private void showNextQuestion(){
@@ -157,26 +158,41 @@ public class QuizActivity extends AppCompatActivity {
         switch (currentQuestion.getAnswerNr()){
             case 1:
                 rb1.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Jawaban ke-1 yang benar" );
+//                textViewQuestion.setText( "Jawaban ke-1 yang benar" );
                 break;
             case 2:
                 rb2.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Jawaban ke-2 yang benar" );
+//                textViewQuestion.setText( "Jawaban ke-2 yang benar" );
                 break;
             case 3:
                 rb3.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Jawaban ke-3 yang benar" );
+//                textViewQuestion.setText( "Jawaban ke-3 yang benar" );
                 break;
             case 4:
                 rb4.setTextColor( Color.GREEN );
-                textViewQuestion.setText( "Jawaban ke-4 yang benar" );
+//                textViewQuestion.setText( "Jawaban ke-4 yang benar" );
                 break;
         }
+        Toast.makeText( this, "Jawaban ke-"+ currentQuestion.getAnswerNr() +" yang benar", Toast.LENGTH_SHORT ).show();
 
         if(questionCounter < questionCountTotal){
             buttonConfirmNext.setText( "Selanjutnya" );
         } else{
             buttonConfirmNext.setText( "Selesai" );
+        }
+    }
+
+    private void lockButton(boolean lock){
+        if (lock == true){
+            rb1.setEnabled( false );
+            rb2.setEnabled( false );
+            rb3.setEnabled( false );
+            rb4.setEnabled( false );
+        } else{
+            rb1.setEnabled( true );
+            rb2.setEnabled( true );
+            rb3.setEnabled( true );
+            rb4.setEnabled( true );
         }
     }
 

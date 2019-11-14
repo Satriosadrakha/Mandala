@@ -3,6 +3,7 @@ package com.example.sprint2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,7 +25,7 @@ public class StartQuizActivity extends AppCompatActivity {
 
     public static final String SHARED_PREFS = "sharedPrefs";
 
-    public static final String[] KEY_HIGHSCORE = {"keyHighscore1", "keyHighscore2", "keyHighscore3", "keyHighscore4", "keyHighscore5", "keyHighscore6", "keyHighscore7","keyHighscore8"};
+    public static final String[] KEY_HIGHSCORE = {"keyHighscore1", "keyHighscore2", "keyHighscore3", "keyHighscore4", "keyHighscore5", "keyHighscore6", "keyHighscore7","keyHighscore8","keyHighscore9","keyHighscore10","keyHighscore11","keyHighscore12"};
 //    public static final String KEY_HIGHSCORE1 = "keyHighscore1";
 //    public static final String KEY_HIGHSCORE2 = "keyHighscore2";
 //    public static final String KEY_HIGHSCORE3 = "keyHighscore3";
@@ -35,9 +36,11 @@ public class StartQuizActivity extends AppCompatActivity {
     int categoryID;
     String categoryName;
     private int highscore;
+    int colorResolved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pickColor();
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_start_quiz );
 
@@ -161,5 +164,33 @@ public class StartQuizActivity extends AppCompatActivity {
 //        }
         editor.putInt( KEY_HIGHSCORE[requestCode-1], highscore );
         editor.apply();
+    }
+
+    private void pickColor(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String storedPreference = prefs.getString( "colorScheme","blue" );
+
+        switch(storedPreference) {
+            case "orange":
+                colorResolved =  getResources().getColor(R.color.colorOrange);
+                setTheme( R.style.AppTheme_Orange );
+                break;
+            case "blue":
+                colorResolved =  getResources().getColor(R.color.colorBlue);
+                setTheme( R.style.AppTheme_Blue );
+                break;
+            case "red":
+                colorResolved =  getResources().getColor(R.color.colorRed);
+                setTheme( R.style.AppTheme_Red );
+                break;
+            case "grey":
+                colorResolved =  getResources().getColor(R.color.colorGrey);
+                setTheme( R.style.AppTheme_Grey );
+                break;
+            default:
+                colorResolved =  getResources().getColor(R.color.colorPrimary);
+                setTheme( R.style.AppTheme );
+
+        }
     }
 }

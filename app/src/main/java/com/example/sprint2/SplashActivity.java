@@ -1,7 +1,9 @@
 package com.example.sprint2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
@@ -17,9 +19,11 @@ public class SplashActivity extends AppCompatActivity {
     private Animation blink;
     private int intervalsplash = 3000;
     private long backPressedTime;
+    int colorResolved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pickColor();
         super.onCreate(savedInstanceState);
         this.requestWindowFeature( Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
@@ -30,7 +34,7 @@ public class SplashActivity extends AppCompatActivity {
         // start activity after some amount of time
         new Handler().postDelayed(() ->
                 startActivity(new Intent(getApplicationContext()
-                        ,LoginActivity.class)), Long.parseLong(String.valueOf(intervalsplash)));
+                        ,MenuActivity.class)), Long.parseLong(String.valueOf(intervalsplash)));
         //new Handler().postDelayed(() ->
         //startActivity(new Intent(getApplicationContext(),
         //MainMenu.class)), Long.parseLong(String.valueOf(intervalsplash)));
@@ -61,5 +65,33 @@ public class SplashActivity extends AppCompatActivity {
             Toast.makeText( this, "Tekan kembali untuk keluar aplikasi", Toast.LENGTH_SHORT ).show();
         }
         backPressedTime = System.currentTimeMillis();
+    }
+
+    private void pickColor(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String storedPreference = prefs.getString( "colorScheme","blue" );
+
+        switch(storedPreference) {
+            case "orange":
+                colorResolved =  getResources().getColor(R.color.colorOrange);
+                setTheme( R.style.AppTheme_Orange );
+                break;
+            case "blue":
+                colorResolved =  getResources().getColor(R.color.colorBlue);
+                setTheme( R.style.AppTheme_Blue );
+                break;
+            case "red":
+                colorResolved =  getResources().getColor(R.color.colorRed);
+                setTheme( R.style.AppTheme_Red );
+                break;
+            case "grey":
+                colorResolved =  getResources().getColor(R.color.colorGrey);
+                setTheme( R.style.AppTheme_Grey );
+                break;
+            default:
+                colorResolved =  getResources().getColor(R.color.colorPrimary);
+                setTheme( R.style.AppTheme );
+
+        }
     }
 }

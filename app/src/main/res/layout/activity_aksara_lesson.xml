@@ -27,10 +27,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
 
-            <ListView
+            <com.example.sprint2.CustomListView
                 android:id="@+id/list_row"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"></ListView>
+                android:layout_height="wrap_content"></com.example.sprint2.CustomListView>
 
             <Space
                 android:layout_width="match_parent"

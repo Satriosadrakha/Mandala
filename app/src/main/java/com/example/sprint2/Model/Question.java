@@ -9,6 +9,7 @@ public class Question {
     private String option2;
     private String option3;
     private String option4;
+    private int optionImg1,optionImg2,optionImg3,optionImg4;
     private int answerNr;
     private int categoryID;
 
@@ -22,6 +23,28 @@ public class Question {
         this.option2 = option2;
         this.option3 = option3;
         this.option4 = option4;
+        this.answerNr = answerNr;
+        this.categoryID = categoryID;
+    }
+
+    public Question(String question, int questionImg, String option1, String option2, String option3, String option4,
+                    int answerNr, int categoryID) {
+        this.question = question;
+        this.option1 = option1;
+        this.option2 = option2;
+        this.option3 = option3;
+        this.option4 = option4;
+        this.answerNr = answerNr;
+        this.categoryID = categoryID;
+    }
+
+    public Question(String question, int optionImg1, int optionImg2, int optionImg3, int optionImg4,
+                    int answerNr, int categoryID) {
+        this.question = question;
+        this.optionImg1 = optionImg1;
+        this.optionImg2 = optionImg2;
+        this.optionImg3 = optionImg3;
+        this.optionImg4 = optionImg4;
         this.answerNr = answerNr;
         this.categoryID = categoryID;
     }
@@ -96,6 +119,40 @@ public class Question {
     public void setOption4(String option4) {
         this.option4 = option4;
     }
+
+
+    public int getOptionImg1() {
+        return optionImg1;
+    }
+
+    public void setOptionImg1(int optionImg1) {
+        this.optionImg1 = optionImg1;
+    }
+
+    public int getOptionImg2() {
+        return optionImg2;
+    }
+
+    public void setOptionImg2(int optionImg2) {
+        this.optionImg2 = optionImg2;
+    }
+
+    public int getOptionImg3() {
+        return optionImg3;
+    }
+
+    public void setOptionImg3(int optionImg3) {
+        this.optionImg3 = optionImg3;
+    }
+
+    public int getOptionImg4() {
+        return optionImg4;
+    }
+
+    public void setOptionImg4(int optionImg4) {
+        this.optionImg4 = optionImg4;
+    }
+
 
     public int getAnswerNr() {
         return answerNr;

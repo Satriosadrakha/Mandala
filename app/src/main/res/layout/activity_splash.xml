@@ -25,7 +25,7 @@
             android:textAlignment="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Mandala\n\nAplikasi Pengajaran\nBahasa Sunda"/>
+            android:text="@string/splash_text"/>
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -47,7 +47,7 @@
     <!--    <string name="login_failed">"Login failed"</string>-->
 
     <!-- Menu Activity-->
-    <string name="nav_beranda">Beranda</string>
+    <string name="nav_beranda">Home</string>
     <string name="button_about">Tentang Kami</string>
     <string name="button_aksara_sunda">Aksara\nSunda</string>
     <string name="button_dasar">Dasar</string>
@@ -295,10 +295,6 @@
         <item>Warna2</item>
         <item>Angka1</item>
         <item>Angka2</item>
-        <item>Bunga1</item>
-        <item>Bunga2</item>
-        <item>Dapur1</item>
-        <item>Dapur2</item>
     </string-array>
     <string-array name="categoryDisplay">
         <item>Pelajaran Dasar bagian 1</item>

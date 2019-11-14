@@ -1,10 +1,15 @@
 package com.example.sprint2;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.Image;
 import android.media.MediaPlayer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -21,49 +26,29 @@ import java.util.HashMap;
 import java.util.List;
 
 public class AksaraLessonActivity extends AppCompatActivity {
+    private ListView lv;
+    public static ArrayList<Character> modelArrayList;
+    private CustomAdapter customAdapter;
+
     DatabaseHelper db;
-//    Button[] btn6 = new Button[6];
-//    Button[] btn3 = new Button[3];
-//    Button[] btn5 = new Button[5];
 
-
-    // Array of strings for ListView Title
-    String[] listviewTitle;// = new String[]{
-//            "A", "I", "U", "é",
-//            "O", "E", "EU", "BA",
-//    };
-
-    int[] listviewImage;// = new int[]{
-//            R.drawable.a, R.drawable.i, R.drawable.u, R.drawable.e_,
-//            R.drawable.o, R.drawable.e, R.drawable.eu, R.drawable.ba,
-//    };
-
-    String[] listviewShortDescription;// = new String[]{
-//            "Android ListView Short Description", "Android ListView Short Description", "Android ListView Short Description", "Android ListView Short Description",
-//            "Android ListView Short Description", "Android ListView Short Description", "Android ListView Short Description", "Android ListView Short Description",
-//    };
-
+    String[] listviewTitle;
+    int[] listviewImage;
+    String[] listviewShortDescription;
+    int colorResolved;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pickColor();
         super.onCreate( savedInstanceState );
-        setTitle( "Pelajaran Aksara Sunda" );
         setContentView( R.layout.activity_aksara_lesson );
 
-//        ImageButton imgBtn = (ImageButton)findViewById( R.id.listrow_sound );
         db = new DatabaseHelper(this);
 
         int lessonId = getIntent().getIntExtra("LESSON_ID", 0);
         Log.d("LessonID", String.valueOf( lessonId ) );
 
-
-
-//        Word word1 = new Word("Ada", "a");
-//        long word1_id = db.createWord(word1);
-//        Character a = new Character("a");
-//        long character1_id = db.createCharacter(1, a, new long[] { word1_id });
-//        Log.d("Char", String.valueOf( db.getCharacter(1) ));
-        //String[] character = new String[3];
+        setTitle( "Pelajaran " + (lessonId + 1) );
 
         List<Character> character = new ArrayList<>(  );
 
@@ -81,195 +66,130 @@ public class AksaraLessonActivity extends AppCompatActivity {
             case 0:
                 start = 1;
                 listnum = 7;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=1; i<=7; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    if (i == 2){
-                        listviewImage[i-start] = getResources().getIdentifier( "e_", "drawable", getPackageName());
-                    }
-//                    int finalI = i-1;
-//                    btn6[i].setOnClickListener( new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            Object tag = v.getTag();
-//                            Toast.makeText(getApplicationContext(), "clicked button", Toast.LENGTH_SHORT).show();
-//                            final MediaPlayer mp = (MediaPlayer) MediaPlayer.create(getApplicationContext(), getResources().getIdentifier(String.valueOf( getResources().getStringArray(R.array.ngalagena)[finalI] ),"raw", getPackageName()));
-//                            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                                @Override public void onCompletion(MediaPlayer mp) {
-//                                    mp.reset();
-//                                    mp.release();
-//                                    mp=null;
-//                                }
-//                            });
-//                            mp.start();
-//                        }
-//                    });
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
             case 1:
                 start = 8;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=8; i<=10; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                    Log.d("Desc", listviewShortDescription[i-8]);
-                    Log.d("Char", listviewTitle[i-8]);
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
             case 2:
                 start = 11;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=11; i<=13; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
             case 3:
                 start = 14;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=14; i<=16; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
             case 4:
                 start = 17;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=17; i<=19; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
             case 5:
                 start = 20;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=20; i<=22; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
             case 6:
                 start = 23;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=23; i<=25; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
             case 7:
                 listnum = 5;
                 start = 26;
-                listviewTitle = new String[listnum];
-                listviewImage = new int[listnum];
-                listviewShortDescription = new String[listnum];
-                for (int i=26; i<=30; i++){
-                    listviewTitle[i-start] = db.getCharacter( i ).getSunda();
-                    listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
-                    listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
-                }
+                modelArrayList = getModel(start, listnum);
                 break;
         }
 
         TextView aksaraLessontext1 = (TextView)findViewById(R.id.textView1);
         TextView aksaraLessontext2 = (TextView)findViewById(R.id.textView2);
 
-        //long currentTimeStamp = System.currentTimeMillis();
-        //lastMsg.setText(getResources().getStringArray(R.string.arrayLesson1));
         String[] text1 = getResources().getStringArray(R.array.aksaraLesson1);
         String[] text2 = getResources().getStringArray(R.array.aksaraLesson2);
 
         aksaraLessontext1.setText(text1[lessonId]);
         aksaraLessontext2.setText(text2[lessonId]);
 
-        List<HashMap<String, String>> aList = new ArrayList<HashMap<String, String>>();
+        lv = (ListView) findViewById(R.id.list_row);
 
-        for (int i = 0; i < listnum; i++) {
-            HashMap<String, String> hm = new HashMap<String, String>();
-            hm.put("listview_title", listviewTitle[i]);
-            hm.put("listview_description", listviewShortDescription[i]);
-            hm.put("listview_image", Integer.toString(listviewImage[i]));
-            aList.add(hm);
-        }
-
-        String[] from = {"listview_image", "listview_title", "listview_description"};
-        int[] to = {R.id.listrow_image, R.id.listrow_sunda, R.id.listrow_contoh};
-
-        final MediaPlayer mp = (MediaPlayer) MediaPlayer.create(getApplicationContext(),
-                getResources().getIdentifier("a","raw", getPackageName()));
-
-//        ImageButton sound = (ImageButton)findViewById(R.id.listrow_sound);
-//        Log.d("SOUND", String.valueOf( sound ) );
-//        sound.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                    @Override public void onCompletion(MediaPlayer mp) {
-//                        mp.reset();
-//                        mp.release();
-//                        mp = null;
-//                    }
-//                });
-//                mp.start();
-//            }
-//        });
-
-
-
-//        sound.setOnClickListener(new View.OnClickListener(){
-//            public void onClick(View v) {
-//
-//
-//                mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//                    @Override public void onCompletion(MediaPlayer mp) {
-//                        mp.reset();
-//                        mp.release();
-//                        mp = null;
-//                    }
-//                });
-//                mp.start();
-//            }
-//        });
-
-        SimpleAdapter simpleAdapter = new SimpleAdapter(getBaseContext(), aList, R.layout.list_row, from, to);
-        ListView androidListView = (ListView) findViewById(R.id.list_row);
-        androidListView.setAdapter(simpleAdapter);
+        customAdapter = new CustomAdapter(this);
+        lv.setAdapter(customAdapter);
     }
 
-//    @Override
-//    protected void onListItemClick(ListView l, View v, int position, long id) {
-//        String item = (String) getListAdapter().getItem(position);
-//        Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
-//    }
+    private ArrayList<Character> getModel(int start, int listnum){
+        ArrayList<Character> list = new ArrayList<>();
+        listviewTitle = new String[listnum];
+        listviewImage = new int[listnum];
+        listviewShortDescription = new String[listnum];
+        for (int i=start; i<start+listnum; i++){
+            listviewTitle[i-start] = db.getCharacter( i ).getSunda();
+            if(i==2){
+                listviewImage[i-start] = getResources().getIdentifier( "e_", "drawable", getPackageName());
+            } else{
+                listviewImage[i-start] = getResources().getIdentifier( listviewTitle[i-start], "drawable", getPackageName());
+            }
+            listviewShortDescription[i-start] = String.valueOf( getResources().getStringArray(R.array.shortdesc)[i-1] );
 
-    protected void onListItemClick(ListView listrow_sound, View v, int position, long id) {
+            Log.d("Title", listviewTitle[i-start]);
+            Log.d("Image", String.valueOf( listviewImage[i-start] ));
 
-//        String item = (String) getListAdapter().getItem(position);
-//        Toast.makeText(this, item + " selected", Toast.LENGTH_LONG).show();
-        //        super.onListItemClick(list, view, position, id);
-//        String fname = String.valueOf(position + 1);
-        int resID=getResources().getIdentifier("a", "raw", getPackageName());
-        MediaPlayer mediaPlayer=MediaPlayer.create(this,resID);
-        mediaPlayer.start();
+            Character model = new Character();
+            model.setSunda(listviewTitle[i-start]);
+            model.setContoh(listviewShortDescription[i-start]);
+            model.setImage(listviewImage[i-start]);
+            model.setSound( i );
+
+            list.add(model);
+        }
+        return list;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent intentSetting = new Intent(this, SettingActivity.class);
+                startActivity(intentSetting );
+                return true;
+            case R.id.action_about_us:
+                Intent intentAbout = new Intent(this, AboutActivity.class);
+                startActivity(intentAbout);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void pickColor(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String storedPreference = prefs.getString( "colorScheme","blue" );
+
+        switch(storedPreference) {
+            case "orange":
+                colorResolved =  getResources().getColor(R.color.colorOrange);
+                setTheme( R.style.AppTheme_Orange );
+                break;
+            case "blue":
+                colorResolved =  getResources().getColor(R.color.colorBlue);
+                setTheme( R.style.AppTheme_Blue );
+                break;
+            case "red":
+                colorResolved =  getResources().getColor(R.color.colorRed);
+                setTheme( R.style.AppTheme_Red );
+                break;
+            case "grey":
+                colorResolved =  getResources().getColor(R.color.colorGrey);
+                setTheme( R.style.AppTheme_Grey );
+                break;
+            default:
+                colorResolved =  getResources().getColor(R.color.colorPrimary);
+                setTheme( R.style.AppTheme );
+
+        }
     }
 }

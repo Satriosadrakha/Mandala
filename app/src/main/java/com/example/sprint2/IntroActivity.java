@@ -1,11 +1,17 @@
 package com.example.sprint2;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class IntroActivity extends AppCompatActivity {
@@ -18,11 +24,20 @@ public class IntroActivity extends AppCompatActivity {
 
     LinearLayout linear, ngalagena1, ngalagena2, ngalagena3, rarangken1, rarangken2;
 
+    int colorResolved;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        pickColor();
         super.onCreate( savedInstanceState );
-        setTitle( "Apa itu Aksara Sunda?" );
+        setTitle( getResources().getString( R.string.nav_intro ) );
         setContentView( R.layout.activity_intro );
+
+        TextView introLatinNote = (TextView)findViewById( R.id.introLatinNote );
+//        introLatinNote.setBackgroundResource(R.color.colorRed);
+
+        TextView textView12 = (TextView)findViewById( R.id.textView12 );
+//        textView12.setBackgroundResource(R.color.colorRedDark);
 
         //Set buttons in linear layout
         linear = (LinearLayout) findViewById(R.id.linear);
@@ -263,5 +278,56 @@ public class IntroActivity extends AppCompatActivity {
                 mp.start();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent intentSetting = new Intent(this, SettingActivity.class);
+                startActivity(intentSetting );
+                return true;
+            case R.id.action_about_us:
+                Intent intentAbout = new Intent(this, AboutActivity.class);
+                startActivity(intentAbout);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void pickColor(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String storedPreference = prefs.getString( "colorScheme","blue" );
+
+        switch(storedPreference) {
+            case "orange":
+                colorResolved =  getResources().getColor(R.color.colorOrange);
+                setTheme( R.style.AppTheme_Orange );
+                break;
+            case "blue":
+                colorResolved =  getResources().getColor(R.color.colorBlue);
+                setTheme( R.style.AppTheme_Blue );
+                break;
+            case "red":
+                colorResolved =  getResources().getColor(R.color.colorRed);
+                setTheme( R.style.AppTheme_Red );
+                break;
+            case "grey":
+                colorResolved =  getResources().getColor(R.color.colorGrey);
+                setTheme( R.style.AppTheme_Grey );
+                break;
+            default:
+                colorResolved =  getResources().getColor(R.color.colorPrimary);
+                setTheme( R.style.AppTheme );
+
+        }
     }
 }

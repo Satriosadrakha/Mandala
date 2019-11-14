@@ -69,8 +69,6 @@
                     android:layout_weight="2"
                     android:text="Ini adalah karakter latin"
                     android:gravity="center"
-                    android:textColor="@color/white"
-                    android:background="@color/colorPrimaryDark"
                     android:layout_margin="4dp"/>
 
             </LinearLayout>
@@ -104,10 +102,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
-                    android:background="@color/colorPrimaryDark"
                     android:gravity="center"
                     android:text="Ini adalah aksara Sunda"
-                    android:textColor="@color/white"
                     android:layout_margin="4dp"
                     />
 

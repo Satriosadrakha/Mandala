@@ -183,16 +183,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //        Category c3 = new Category( "Hewan" );
 //        addCategory( c3 );
 
-        addCategory( new Category( "Basic11" ) );
-        addCategory( new Category( "Basic12" ) );
-        addCategory( new Category( "Basic21" ) );
-        addCategory( new Category( "Basic22" ) );
+        addCategory( new Category( "Basic1" ) );
+        addCategory( new Category( "Basic2" ) );
+        addCategory( new Category( "Kalimat1" ) );
+        addCategory( new Category( "Kalimat2" ) );
         addCategory( new Category( "Hewan1" ) );
         addCategory( new Category( "Hewan2" ) );
         addCategory( new Category( "Warna1" ) );
         addCategory( new Category( "Warna2" ) );
         addCategory( new Category( "Angka1" ) );
         addCategory( new Category( "Angka2" ) );
+        addCategory( new Category( "Dapur1" ) );
+        addCategory( new Category( "Dapur2" ) );
     }
 
     private void addCategory(Category category){
@@ -363,6 +365,89 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 2,
                 8  ) );
 
+        addQuestion( new Question(
+                "Bahasa Sunda dari Bunga Matahari adalah",
+                "Kembang Srangéngé", "Kembang Eros", "Kembang Wéra", "Kembang Samoja",
+                1,
+                9  ) );
+        addQuestion( new Question(
+                "Bahasa Sunda dari Bunga Teratai adalah",
+                "Kembang Dahlia", "Kembang Wéra", "Kembang Lotus", "Kembang Taraté",
+                4,
+                9  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Kembang Eros adalah",
+                "Bunga Melati", "Bunga Matahari", "Bunga Mawar", "Bunga Sepatu",
+                3,
+                9  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Kembang Angkrék adalah",
+                "Bunga Mawar", "Bunga Melati", "Bunga Kamboja", "Bunga Anggrek",
+                4,
+                9  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Kembang Wéra adalah",
+                "Bunga Dahlia", "Bunga Kertas", "Bunga Sepatu", "Bunga Cempaka",
+                3,
+                9  ) );
+
+        addQuestion( new Question(
+                "Aksara Sunda dari Kembang Melati adalah",
+                "ᮊᮨᮙ᮪ᮘᮀ ᮙᮨᮜᮒᮤ", "ᮊᮨᮙ᮪ᮘᮀ ᮎᮙ᮪ᮕᮊ", "ᮊᮨᮙ᮪ᮘᮀ ᮈᮛᮧᮞ᮪", "ᮊᮨᮙ᮪ᮘᮀ ᮞᮨᮕᮒᮥ",
+                1,
+                10  ) );
+        addQuestion( new Question(
+                "Aksara Sunda dari Kembang Kertas adalah",
+                "ᮊᮨᮙ᮪ᮘᮀ ᮈᮛᮧᮞ᮪", "ᮊᮨᮙ᮪ᮘᮀ ᮞᮨᮕᮒᮥ", "ᮊᮨᮙ᮪ᮘᮀ ᮊᮨᮁᮒᮞ᮪", "ᮊᮨᮙ᮪ᮘᮀ ᮙᮨᮜᮒᮤ",
+                3,
+                10  ) );
+        addQuestion( new Question(
+                "Aksara Sunda dari Bunga Cempaka adalah",
+                "ᮊᮨᮙ᮪ᮘᮀ ᮎᮙ᮪ᮕᮊ", "ᮊᮨᮙ᮪ᮘᮀ ᮈᮛᮧᮞ᮪", "ᮊᮨᮙ᮪ᮘᮀ ᮞᮨᮕᮒᮥ", "ᮊᮨᮙ᮪ᮘᮀ ᮙᮨᮜᮒᮤ",
+                1,
+                10  ) );
+
+        addQuestion( new Question(
+                "Bahasa Sunda dari Bakul adalah",
+                "Céntong", "Boboko", "Aseupan", "Hawu",
+                2,
+                11  ) );
+        addQuestion( new Question(
+                "Bahasa Sunda dari Kukusan adalah",
+                "Hawu", "Aseupan", "Baki", "Boboko",
+                2,
+                11  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Sééng adalah",
+                "Talanan", "Tungku", "Dandang", "Cobek",
+                3,
+                11  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Hawu adalah",
+                "Pengayak", "Cobek", "Baskom", "Tungku",
+                4,
+                11  ) );
+        addQuestion( new Question(
+                "Bahasa Indonesia dari Ayakan adalah",
+                "Dandang", "Baskom", "Pengayak", "Talanan",
+                3,
+                11  ) );
+
+        addQuestion( new Question(
+                "Aksara Sunda dari Céntong adalah",
+                "ᮎᮔ᮪ᮒᮀ", "ᮎᮨᮔ᮪ᮒᮀ", "ᮎᮨᮔ᮪ᮒᮧᮀ", "ᮎᮦᮔ᮪ᮒᮧᮀ",
+                4,
+                12  ) );
+        addQuestion( new Question(
+                "Aksara Sunda dari Coét adalah",
+                "ᮎᮧᮘᮦᮊ᮪", "ᮎᮧᮆᮒ᮪", "ᮎᮧᮘᮨᮊ᮪", "ᮎᮧᮈᮒ᮪",
+                2,
+                12  ) );
+        addQuestion( new Question(
+                "Aksara Sunda dari Baskom adalah",
+                "ᮘᮞ᮪ᮊᮧᮙ᮪", "ᮘᮞ᮪ᮎᮧᮙ᮪", "ᮘᮞᮊᮧᮙ᮪", "ᮘᮞᮨᮊᮧᮙ᮪",
+                1,
+                12  ) );
 
 //        Question q1 = new Question( "BASIC 1: A is correct",
 //                "A", "B", "C",

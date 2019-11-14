@@ -76,8 +76,8 @@
         "\n\nUI/UX Advisor:\nSetiawan Hadi"
         "\n\nEditor/penelaah (isi materi):\nTeddi Muhtadin\nRiki Nawawi"
     </string>
-    <string name="action_settings">Pengaturan</string>
-    <string name="action_about_us">Tentang Kami</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about_us">About Us</string>
     <string name="text_notifications">Notifications Fragment</string>
     <string name="text_search">Search Fragment</string>
     <!--    <string name="text_home">Home Fragment</string>-->
@@ -295,10 +295,6 @@
         <item>Warna2</item>
         <item>Angka1</item>
         <item>Angka2</item>
-        <item>Bunga1</item>
-        <item>Bunga2</item>
-        <item>Dapur1</item>
-        <item>Dapur2</item>
     </string-array>
     <string-array name="categoryDisplay">
         <item>Pelajaran Dasar bagian 1</item>
